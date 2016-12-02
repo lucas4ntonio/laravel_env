@@ -1,9 +1,10 @@
 <html>
     <body>        
+        <a href="/school_add">Schools.</a><br/><br/>
         @if (count($students) > 0)
         <table border="1" cellpadding="10">
             <tr>
-                <th colspan="6">Students</th>
+                <th colspan="6">Students:</th>
             </tr>
             <tr>
                 <th>ID</th>
@@ -19,7 +20,7 @@
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->email }}</td>
                     <td>{{ $student->phone }}</td>
-                    <td>{{ $student->school }}</td>
+                    <td>{{ $student->school->name }}</td>
                     <td>
                         <a href="student_edit/{{ $student->id }}" title="Edit">E</a>
                         <a href="student_add/{{ $student->id }}" title="Delete" onclick="return confirm('Are you sure?');">D</a>
@@ -37,21 +38,28 @@
                     <th colspan="3">New student:</th>
                 </tr>
                 <tr>
-                    <td><label>Name:</label></td>
+                    <th>Name:</th>
                     <td><input type="text" name="name"/></td>
                     <td rowspan="4"><input type="submit" value="+ ADD"/></td>
                 </tr>
                 <tr>
-                    <td>Email:</td>
+                    <th>Email:</th>
                     <td><input type="email" name="email"/></td>
                 </tr>
                 <tr>
-                    <td>Phone:</td>
+                    <th>Phone:</th>
                     <td><input type="text" name="phone"/></td>
                 </tr>
                 <tr>
-                    <td>School:</td>
-                    <td><input type="text" name="school"/></td>
+                    <th>School:</th>
+                    <td>
+                        <select name="school">
+                            <option value="">School</option>
+                            @foreach ($schools as $school)
+                            <option value="{{ $school->id }}">{{ $school->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
                 </tr>
             </table>
         </form>

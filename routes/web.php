@@ -170,7 +170,7 @@ Route::get('/home', 'HomeController@index');
 
 /*
 |--------------------------------------------------------------------------
-| MY STUDENT ADD USING MODELS
+| STUDENTS -- ADD USING MODELS
 |--------------------------------------------------------------------------
 */
 // SHOW ADD FORM -- VIEW _student_add
@@ -183,3 +183,19 @@ Route::get('/student_add/{id}','Students\StudentController@delete');
 Route::get('student_edit/{id}','Students\StudentController@showEditForm');
 // EDIT STUDENT
 Route::post('student_edit/{id}','Students\StudentController@edit');
+
+/*
+|--------------------------------------------------------------------------
+| SCHOOLS
+|--------------------------------------------------------------------------
+*/
+// SHOW ADD FORM -- VIEW _school_add
+Route::get('/school_add','Schools\SchoolController@index');
+// REGISTER
+Route::post('/school_add','Schools\SchoolController@add');
+// DELETE
+Route::get('/school_add/{id}','Schools\SchoolController@delete');
+// SHOW EDIT FORM
+Route::get('school_edit/{id}','Schools\SchoolController@showEditForm');
+// EDIT SCHOOL
+Route::post('school_edit/{id}','Schools\SchoolController@edit');

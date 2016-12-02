@@ -1,32 +1,27 @@
 <?php
-namespace App\Http\Controllers\Students;
 
-use App\Student;
+namespace App\Http\Controllers\Schools;
+
 use App\School;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class StudentController extends Controller
-{    
-    protected $prefix = 'Students\\';
+class SchoolController extends Controller
+{
+    protected $prefix = 'Schools\\';
     # VALIDATOR
     protected $name = 'required|max:50';
-    protected $email = 'required|max:35';
-    protected $phone = 'required|max:8';
-    protected $school = 'required';
+    protected $location = 'required|max:255';
     
     /*
     |--------------------------------------------------------------------------
-    | SHOW STUDENT TABLE AND INSERT FORM
+    | SHOW SCHOOL TABLE AND INSERT FORM
     |--------------------------------------------------------------------------
     */
-    protected function index()
-    {
-        $students = Student::all();
+    protected function index() {
         $schools = School::all();
-        return view($this->prefix.'_student_add',[
-            'students'=>$students,
+        return view($this->prefix.'_school_add',[
             'schools'=>$schools
         ]);
     }
@@ -36,24 +31,20 @@ class StudentController extends Controller
     | FORM VALIDATOR AND ADD METHOD
     |--------------------------------------------------------------------------
     */
-    protected function validator(array $student)
+    protected function validator(array $school)
     {
-        return Validator::make($student, [
+        return Validator::make($school, [
             'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->name,
-            'school' => $this->school
+            'location' => $this->location
         ]);
     }
-        
+    
     protected function add(Request $request)
     {
         $this->validator($request->all())->validate();        
-        Student::create([
-            'school_id'=>$request->school,
+        School::create([
             'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone
+            'location'=>$request->location
         ]);
            
         return $this->redirect();
@@ -66,16 +57,12 @@ class StudentController extends Controller
     */
     protected function showEditForm($id)
     {
-        $student = Student::find($id);
-        $schools = School::all();
+        $school = School::find($id);
         
-        return view($this->prefix.'_student_edit',[
+        return view($this->prefix.'_school_edit',[
             'id'=>$id,
-            'school_id'=>$student->school_id,
-            'name'=>$student->name,
-            'email'=>$student->email,
-            'phone'=>$student->phone,
-            'schools'=>$schools
+            'name'=>$school->name,
+            'location'=>$school->location
         ]);
     }  
     
@@ -83,24 +70,22 @@ class StudentController extends Controller
     {
         $this->validator($request->all())->validate();
         
-        $student = Student::find($id);
-        $student->name = $request->name;
-        $student->email = $request->email;
-        $student->phone = $request->phone;
-        $student->school_id = $request->school;
-        $student->save();
+        $school = School::find($id);
+        $school->name = $request->name;
+        $school->location = $request->location;
+        $school->save();
         
         return $this->redirect();
     }
     
     /*
     |--------------------------------------------------------------------------
-    | DELETE STUDENT
+    | DELETE SCHOOL
     |--------------------------------------------------------------------------
     */
     protected function delete($id)
     {
-        Student::destroy($id);
+        School::destroy($id);
         
         return $this->redirect();
     }
@@ -112,6 +97,6 @@ class StudentController extends Controller
     */
     protected function redirect()
     {
-        return redirect(url('/student_add'));
+        return redirect(url('/school_add'));
     }
 }

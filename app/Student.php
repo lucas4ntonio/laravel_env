@@ -11,5 +11,9 @@ class Student extends Model
     
     protected $table = 'student';
     protected $dates = ['deleted_at'];
-    protected $fillable = array('name','email','phone','school');
+    protected $fillable = array('school_id','name','email','phone');
+    
+    public function school() {
+        return $this->belongsTo('App\School');
+    }
 }
