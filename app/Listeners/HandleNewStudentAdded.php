@@ -29,6 +29,6 @@ class HandleNewStudentAdded
     public function handle(StudentAdded $event)
     {
         $this->name = $event->name;
-        echo "<br/>New student added in database with name: ".$this->name;
+        echo "New student added in database with name: ".$this->name;
     }
 }

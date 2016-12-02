@@ -159,6 +159,30 @@ Route::post('/uploadfile','UploadFileController@showUploadFile');
 */
 Route::get('event','CreateStudentController@insertForm');
 Route::post('addstudent','CreateStudentController@insert');
+
+/*
+|--------------------------------------------------------------------------
+| AUTH -- LOGIN / REGISTER
+|--------------------------------------------------------------------------
+*/
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+/*
+|--------------------------------------------------------------------------
+| MY STUDENT ADD USING MODELS
+|--------------------------------------------------------------------------
+*/
+
+// SHOW ADD FORM -- VIEW _student_add
+Route::get('/student_add','Students\StudentController@index');
+// REGISTER
+Route::post('/student_add','Students\StudentController@add');
+// DELETE
+Route::get('/student_add/{id}','Students\StudentController@delete');
+// SHOW EDIT FORM
+Route::get('student_edit/{id}','Students\StudentController@showEditForm');
+// EDIT STUDENT
+Route::post('student_edit/{id}','Students\StudentController@edit');
