@@ -166,16 +166,13 @@ Route::post('addstudent','CreateStudentController@insert');
 |--------------------------------------------------------------------------
 */
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
-
 
 /*
 |--------------------------------------------------------------------------
 | MY STUDENT ADD USING MODELS
 |--------------------------------------------------------------------------
 */
-
 // SHOW ADD FORM -- VIEW _student_add
 Route::get('/student_add','Students\StudentController@index');
 // REGISTER
