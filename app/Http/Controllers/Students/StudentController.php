@@ -10,7 +10,10 @@ class StudentController extends Controller
 {    
     protected $prefix = 'Students\\';
     # VALIDATOR
-    protected $name = 'required|max:25';
+    protected $name = 'required|max:50';
+    protected $email = 'required|max:35';
+    protected $phone = 'required|max:8';
+    protected $school = 'required|max:50';
     
     /*
     |--------------------------------------------------------------------------
@@ -32,15 +35,21 @@ class StudentController extends Controller
     {
         return Validator::make($student, [
             'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->name,
+            'school' => $this->school
         ]);
     }
         
     public function add(Request $request)
     {
         $this->validator($request->all())->validate();        
-        Student::create(
-                ['name'=>$request->name]
-        );
+        Student::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'school'=>$request->school
+        ]);
            
         return $this->redirect();
     }
@@ -77,6 +86,9 @@ class StudentController extends Controller
         
         $student = Student::find($id);
         $student->name = $request->name;
+        $student->email = $request->email;
+        $student->phone = $request->phone;
+        $student->school = $request->school;
         $student->save();
         
         return $this->redirect();

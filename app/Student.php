@@ -11,5 +11,5 @@ class Student extends Model
     
     protected $table = 'student';
     protected $dates = ['deleted_at'];
-    protected $fillable = ['name'];
+    protected $fillable = array('name','email','phone','school');
 }
